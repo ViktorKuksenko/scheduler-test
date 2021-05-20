@@ -28,6 +28,8 @@ hs_err_pid*
 user.properties
 config.properties
 
+credentials.properties
+
 # Config Files
 *.ini
 
