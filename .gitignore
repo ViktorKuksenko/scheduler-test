@@ -25,6 +25,8 @@ hs_err_pid*
 ##################
 # NEW IGNORE FILES
 
+*.properties
+
 # Config Files
 *.ini
 
