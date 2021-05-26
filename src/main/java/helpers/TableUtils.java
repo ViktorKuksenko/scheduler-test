@@ -79,7 +79,6 @@ public class TableUtils {
                 .waitForElementToBeVisible();
         List<WebElement> elementsInTableRow = driver.findElements(By.xpath(String
                 .format("//tbody/tr[contains(@class, '%s')][%d]/td/span", rowsClassName, index)));
-
         return getListOfWebElementsText(elementsInTableRow);
     }
 

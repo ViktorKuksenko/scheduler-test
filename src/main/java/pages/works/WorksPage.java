@@ -26,13 +26,16 @@ public class WorksPage extends TopPage {
 
     public WorksDetailsPage clickDetailsButtonByTableRow(long tableRow) {
         String tableRowElementXpathExp = String.format("//tbody/tr[%d]/td/a[text()='Details']", tableRow);
-        getAPTSElement(By.xpath(tableRowElementXpathExp)).click();
+        getAPTSElement(By.xpath(tableRowElementXpathExp)).waitForElementToBeVisible(20)
+                .waitForElementToBeClickable()
+                .click();
         return new WorksDetailsPage(driver);
     }
 
     public WorksPage clickDeleteButtonByTableRowNumber(long tableRow) {
         String tableRowElementXpathExp = String.format("//tr[%d]/td/form/button[text()='Delete']", tableRow);
-        APTSElement deleteButton = getAPTSElement(By.xpath(tableRowElementXpathExp)).waitForElementToBeClickable().click();
+        APTSElement deleteButton = getAPTSElement(By.xpath(tableRowElementXpathExp)).waitForElementToBeClickable()
+                .click();
         WaitUtils.waitForStalenessOfElementLocated(driver, deleteButton.getWebElement());
         return this;
     }

@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Objects;
+
 public class RegisterUserModel {
 
     private String userName;
@@ -107,5 +109,43 @@ public class RegisterUserModel {
 
     public void setUserType(String userType) {
         this.userType = userType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof RegisterUserModel)) return false;
+        RegisterUserModel that = (RegisterUserModel) o;
+        return Objects.equals(userName, that.userName) &&
+                Objects.equals(password, that.password) &&
+                Objects.equals(firstName, that.firstName) &&
+                Objects.equals(lastName, that.lastName) &&
+                Objects.equals(email, that.email) &&
+                Objects.equals(mobile, that.mobile) &&
+                Objects.equals(street, that.street) &&
+                Objects.equals(postCode, that.postCode) &&
+                Objects.equals(city, that.city) &&
+                Objects.equals(userType, that.userType);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userName, password, firstName, lastName, email, mobile, street, postCode, city, userType);
+    }
+
+    @Override
+    public String toString() {
+        return "RegisterUserModel{" +
+                "userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", street='" + street + '\'' +
+                ", postCode='" + postCode + '\'' +
+                ", city='" + city + '\'' +
+                ", userType='" + userType + '\'' +
+                '}';
     }
 }

@@ -122,7 +122,7 @@ public class WorksTest extends TestRunner {
                 .clickSaveButton();
     }
 
-    public void deleteWorks(WorksPage worksPage, DetailsPageModel detailsPageModel) {
+    private void deleteWorks(WorksPage worksPage, DetailsPageModel detailsPageModel) {
         worksPage.clickDeleteButtonByTableRowName(detailsPageModel.getName());
     }
 
@@ -131,13 +131,4 @@ public class WorksTest extends TestRunner {
         return String.format(name + "_%d", random.nextInt(9999));
     }
 
-    private String createRandomValueWithInteger() {
-        Random random = new Random();
-        return Integer.toString(random.nextInt(9999));
-    }
-
-    private String createRandomValueWithDouble() {
-        Random random = new Random();
-        return String.format("%d.00", random.nextInt(9999));
-    }
 }

@@ -1,5 +1,6 @@
 package pages;
 
+import helpers.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -27,15 +28,24 @@ public class APTSElement {
     }
 
     public APTSElement waitForElementToBeVisible(long timeout) {
-        return waitUntil(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator), timeout);
+        WaitUtils.setZeroImplicitlyWait(driver);
+        APTSElement aptsElement = waitUntil(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator), timeout);
+        WaitUtils.setDefaultImplicitlyWait(driver);
+        return aptsElement;
     }
 
     public APTSElement waitForElementToBeVisible() {
-        return waitUntil(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator), WAIT_TIMEOUT);
+        WaitUtils.setZeroImplicitlyWait(driver);
+        APTSElement aptsElement = waitUntil(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator), WAIT_TIMEOUT);
+        WaitUtils.setDefaultImplicitlyWait(driver);
+        return aptsElement;
     }
 
     public APTSElement waitForElementToBeClickable() {
-        return waitUntil(ExpectedConditions.elementToBeClickable(locator), WAIT_TIMEOUT);
+        WaitUtils.setZeroImplicitlyWait(driver);
+        APTSElement aptsElement = waitUntil(ExpectedConditions.elementToBeClickable(locator), WAIT_TIMEOUT);
+        WaitUtils.setDefaultImplicitlyWait(driver);
+        return aptsElement;
     }
 
     public APTSElement waitForElementToBePresent() {

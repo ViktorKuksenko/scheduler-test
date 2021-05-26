@@ -1,8 +1,8 @@
 package helpers;
 
 import models.DetailsPageModel;
+import models.RegisterCorporateUserModel;
 import models.RegisterUserModel;
-import pages.works.WorksDetailsPage;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -15,6 +15,7 @@ public class DBHelper {
 
     private Connection connection;
     private Statement statement;
+    private static final String GET_DATA_FROM_USERS_TABLE = "SELECT * FROM users";
 
     private DBHelper() {
         connection = ConnFactory.getConnection();
@@ -60,11 +61,11 @@ public class DBHelper {
     }
 
     public boolean isObjectPresentInUsersTable(RegisterUserModel registerModel) {
-        String query = "SELECT * FROM users";
+
         List<RegisterUserModel> registerUserModels = new ArrayList<>();
         boolean isObjectPresent = false;
         try {
-            ResultSet resultSet = executeQuery(query, statement);
+            ResultSet resultSet = executeQuery(GET_DATA_FROM_USERS_TABLE, statement);
             while (resultSet.next()) {
                 RegisterUserModel registerUserModel = new RegisterUserModel();
                 registerUserModel.setUserName(resultSet.getString("username"));
@@ -90,6 +91,43 @@ public class DBHelper {
                     registerModel.getStreet().equals(registerUserModel.getStreet()) &&
                     registerModel.getCity().equals(registerUserModel.getCity()) &&
                     registerModel.getPostCode().equals(registerUserModel.getPostCode())) {
+                isObjectPresent = true;
+            }
+        }
+
+        return isObjectPresent;
+    }
+
+    public boolean isObjectPresentInUsersTable(RegisterCorporateUserModel registerCorporateUserModel) {
+        List<RegisterCorporateUserModel> registerUserModels = new ArrayList<>();
+        boolean isObjectPresent = false;
+        try {
+            ResultSet resultSet = executeQuery(GET_DATA_FROM_USERS_TABLE, statement);
+            while (resultSet.next()) {
+                RegisterCorporateUserModel registerUserModel = new RegisterCorporateUserModel();
+                registerUserModel.setUsername(resultSet.getString("username"));
+                registerUserModel.setContactPersonFirstName(resultSet.getString("first_name"));
+                registerUserModel.setContactPersonLastName(resultSet.getString("last_name"));
+                registerUserModel.setEmail(resultSet.getString("email"));
+                registerUserModel.setMobile(resultSet.getString("mobile"));
+                registerUserModel.setStreet(resultSet.getString("street"));
+                registerUserModel.setCity(resultSet.getString("city"));
+                registerUserModel.setPostCode(resultSet.getString("postcode"));
+                registerUserModels.add(registerUserModel);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        for (RegisterCorporateUserModel registerUserModel: registerUserModels) {
+//            System.out.println(pageModel.toString());
+            if (registerCorporateUserModel.getUsername().equals(registerUserModel.getUsername()) &&
+                    registerCorporateUserModel.getContactPersonFirstName().equals(registerUserModel.getContactPersonFirstName()) &&
+                    registerCorporateUserModel.getContactPersonLastName().equals(registerUserModel.getContactPersonLastName()) &&
+                    registerCorporateUserModel.getEmail().equals(registerUserModel.getEmail()) &&
+                    registerCorporateUserModel.getMobile().equals(registerUserModel.getMobile()) &&
+                    registerCorporateUserModel.getStreet().equals(registerUserModel.getStreet()) &&
+                    registerCorporateUserModel.getCity().equals(registerUserModel.getCity()) &&
+                    registerCorporateUserModel.getPostCode().equals(registerUserModel.getPostCode())) {
                 isObjectPresent = true;
             }
         }

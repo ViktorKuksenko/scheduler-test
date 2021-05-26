@@ -18,6 +18,7 @@ import org.testng.ITestResult;
 import org.testng.annotations.*;
 import pages.AdminBasePage;
 import pages.LoginPage;
+import pages.TopPage;
 import pages.UserBasePage;
 import pages.providers.ProvidersPage;
 
@@ -25,10 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.security.acl.Acl;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.*;
 
 
 import java.io.File;
@@ -59,13 +57,10 @@ import org.testng.annotations.BeforeSuite;
 public class TestRunner {
 
     private final String BASE_URL = "url";
-    //private final Long IMPLICITLY_WAIT_SECONDS = 10L;
     private final Long ONE_SECOND_DELAY = 1000L;
     private final String TIME_TEMPLATE = "yyyy-MM-dd_HH-mm-ss";
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
     private String serverUrl = "http://localhost:8080";
-    // private WebDriver driver;
     private Map<Long, WebDriver> drivers;
     protected DBHelper dbHelper;
 
@@ -187,10 +182,7 @@ public class TestRunner {
         getDriver().manage().window().setSize(new Dimension(width, height));
     }
 
-
-
     protected <T> T loadApplication(String basePageByUserType) {
-        // return new HomePage(driver);
         T obj = null;
         String pathToPropertiesFile = "C:\\Users\\volod\\OneDrive\\Рабочий стол\\BK\\ui-scheduler\\src\\main\\resources\\users.properties";
         PropertiesUtils propertiesUtils = new PropertiesUtils(pathToPropertiesFile);
@@ -222,8 +214,14 @@ public class TestRunner {
         return new LoginPage(getDriver());
     }
 
-//    public static void main(String[] args) {
-//        new TestRunner().loadApplication("Admin");
-//    }
+    protected String createRandomValueWithInteger() {
+        Random random = new Random();
+        return Integer.toString(random.nextInt(900));
+    }
+
+    protected String createRandomValueWithDouble() {
+        Random random = new Random();
+        return String.format("%d.00", random.nextInt(9999));
+    }
 
 }

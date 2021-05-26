@@ -1,7 +1,9 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import pages.customers.CorporateCustomersPage;
 
 public class LoginPage extends TopPage{
 
@@ -17,18 +19,30 @@ public class LoginPage extends TopPage{
         this.driver = driver;
     }
 
+    @Step("set Login Text Field")
     public LoginPage setLoginField(String login) {
-        loginTextField.waitForElementToBeClickable()
+        try {
+            Thread.sleep(1000);
+        } catch (Throwable ex) {
+            ex.getCause();
+        }
+        loginTextField.waitForElementToBeVisible()
+                .waitForElementToBeClickable()
+                .click()
                 .clearAndSendText(login);
         return this;
     }
 
+    @Step("set Password Text Field")
     public LoginPage setPasswordField(String password) {
-        passwordTextField.waitForElementToBeClickable()
+        passwordTextField.waitForElementToBeVisible()
+                .waitForElementToBeClickable()
+                .click()
                 .clearAndSendText(password);
         return this;
     }
 
+    @Step("click login button")
     public <T> T clickLoginButton(Class<T> clazz) {
         T objToReturn = null;
         if (clazz == AdminBasePage.class) {
@@ -50,10 +64,10 @@ public class LoginPage extends TopPage{
         return new RegisterUserPage(driver);
     }
 
-    public RegisterUserPage clickCorporateLink() {
+    public CorporateCustomersPage clickCorporateLink() {
         corporate.waitForElementToBeClickable()
                 .click();
-        return new RegisterUserPage(driver);
+        return new CorporateCustomersPage(driver);
     }
 
 }

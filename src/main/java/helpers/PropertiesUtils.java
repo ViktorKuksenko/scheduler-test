@@ -29,11 +29,7 @@ public class PropertiesUtils {
        return new HashMap<>(var2);
     }
 
-    /*
-    if key is present change value
-    if key is not present in map add it and value
 
-     */
     public void setProperty(String key, String value) {
         HashMap<String, String> modifiedHashMap = new HashMap<>();
 //        int mapSize = propMap.size();

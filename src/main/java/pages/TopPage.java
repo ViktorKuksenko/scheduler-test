@@ -52,11 +52,8 @@ public abstract class TopPage {
         return logOutElement;
     }
 
-
     public boolean isPresentPageTitle() {
         return driver.getTitle().length() > 0;
     }
-
-
 
 }

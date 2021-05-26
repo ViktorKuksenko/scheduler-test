@@ -7,13 +7,19 @@
     <test name="Test01">
 
         <classes>
-            <class name="tests.admin.WorksTest"/>
+            <class name="tests.UserCreationTest"/>
 
-<!--            <class name="tests.admin.WorksTest">-->
-<!--                <methods>-->
-<!--                    <include name="verifyUpdatingTableAfterClickingDetailsButton"/>-->
-<!--                </methods>-->
-<!--            </class>-->
+            <class name="tests.admin.WorksTest">
+                <methods>
+                    <include name="verifyRetailUserCreation"/>
+                </methods>
+                <methods>
+                    <include name="verifyUserDeletionByAdmin"/>
+                </methods>
+                <methods>
+                    <include name="verifyUserModifyingByAdmin"/>
+                </methods>
+            </class>
 
         </classes>
     </test> <!-- Test -->
