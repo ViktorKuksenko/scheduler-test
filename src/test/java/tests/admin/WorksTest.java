@@ -7,12 +7,12 @@ import org.testng.annotations.Test;
 import pages.AdminBasePage;
 import pages.works.WorksDetailsPage;
 import pages.works.WorksPage;
-import tests.TestRunner;
+import tests.AppointmentsSchedulerTestRunner;
 
 import java.util.Random;
 
 
-public class WorksTest extends TestRunner {
+public class WorksTest extends AppointmentsSchedulerTestRunner {
 
     private static long tableRows = 1L;
 
@@ -29,6 +29,8 @@ public class WorksTest extends TestRunner {
 
     @Test(dataProvider = "detailsPageDataProvider", priority = 1)
     public void verifyPresenceOfElementsInTheTableAfterFillingForm(DetailsPageModel detailsPageModel) {
+        slf4JLogger.info("@Test verifyPresenceOfElementsInTheTableAfterFillingForm");
+
         AdminBasePage adminBasePage = loadApplication("Admin");
 
         WorksPage worksPage = adminBasePage.getWorksPage();
@@ -52,6 +54,8 @@ public class WorksTest extends TestRunner {
 
     @Test(dataProvider = "detailsPageDataProvider", priority = 2)
     public void verifyDeletionOfElements(DetailsPageModel detailsPageModel) {
+        slf4JLogger.info("@Test verifyDeletionOfElements");
+
         AdminBasePage adminBasePage = loadApplication("Admin");
 
         WorksPage worksPage = adminBasePage.getWorksPage();
@@ -74,13 +78,8 @@ public class WorksTest extends TestRunner {
 
     @Test(dataProvider = "detailsPageDataProvider", priority = 3)
     public void verifyUpdatingTableAfterClickingDetailsButton(DetailsPageModel detailsPageModel) {
-        /**
-         * create new work
-         * get size of table records
-         * click details button by table row
-         * change table items
-         * verify changes  ui and db
-         */
+        slf4JLogger.info("@Test verifyUpdatingTableAfterClickingDetailsButton");
+
         AdminBasePage adminBasePage = loadApplication("Admin");
         WorksPage worksPage = adminBasePage.getWorksPage();
         createWork(worksPage, detailsPageModel);

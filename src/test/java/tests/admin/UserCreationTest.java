@@ -1,4 +1,4 @@
-package tests;
+package tests.admin;
 
 import helpers.PropertiesUtils;
 import models.RegisterCorporateUserModel;
@@ -8,11 +8,12 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.AdminBasePage;
 import pages.UserBasePage;
-import pages.customers.CorporateCustomersPage;
+import pages.customers.CorporateCustomerDetailsPage;
 import pages.customers.CustomerDetailsPage;
 import pages.customers.CustomersPage;
+import tests.AppointmentsSchedulerTestRunner;
 
-public class UserCreationTest extends TestRunner {
+public class UserCreationTest extends AppointmentsSchedulerTestRunner {
 
     private static long tableRow = 2;
     private PropertiesUtils propertiesUtils;
@@ -84,7 +85,7 @@ public class UserCreationTest extends TestRunner {
 
     @Test(dataProvider = "registerRetailUserProvider")
     public void verifyRetailUserCreation(RegisterUserModel registerUserModel) {
-
+        slf4JLogger.info("@Test verifyRetailUserCreation");
         registerRetailUser(registerUserModel);
 
         UserBasePage userBasePage = loadApplication("User");
@@ -102,7 +103,7 @@ public class UserCreationTest extends TestRunner {
 
         Assert.assertTrue(dbHelper.isObjectPresentInUsersTable(registerUserModel));
 
-        //clean up
+//        clean up
         deleteUser(customersPage, String.format("%s %s", registerUserModel.getFirstName(),
                 registerUserModel.getLastName()));
 
@@ -112,6 +113,8 @@ public class UserCreationTest extends TestRunner {
 
     @Test(dataProvider = "registerRetailUserProvider")
     public void verifyRetailUserDeletionByAdmin(RegisterUserModel registerUserModel) {
+        slf4JLogger.info("@Test verifyRetailUserDeletionByAdmin");
+
         registerRetailUser(registerUserModel);
 
         AdminBasePage adminBasePage = loadApplication("Admin");
@@ -135,6 +138,7 @@ public class UserCreationTest extends TestRunner {
 
     @Test(dataProvider = "registerRetailUserProvider")
     public void verifyRetailUserModifyingByAdmin(RegisterUserModel registerUserModel) {
+        slf4JLogger.info("@Test verifyRetailUserModifyingByAdmin");
 
         registerRetailUser(registerUserModel);
 
@@ -171,7 +175,7 @@ public class UserCreationTest extends TestRunner {
         Assert.assertTrue(customersPage.isElementPresentInTheTable(String.format("%s %s",
                 newUser.getFirstName(), newUser.getLastName())));
 
-        Assert.assertTrue(dbHelper.isObjectPresentInUsersTable(registerUserModel));
+        Assert.assertTrue(dbHelper.isObjectPresentInUsersTable(newUser));
 
         //clean up
         deleteUser(customersPage, String.format("%s %s", newUser.getFirstName(),
@@ -182,6 +186,8 @@ public class UserCreationTest extends TestRunner {
 
     @Test(dataProvider = "registerCorporateUserProvider")
     public void verifyCorporateUserCreation(RegisterCorporateUserModel registerCorporateUserModel) {
+        slf4JLogger.info("@Test verifyCorporateUserCreation");
+
         registerCorporateUser(registerCorporateUserModel);
 
         UserBasePage userBasePage = loadApplication("User");
@@ -209,6 +215,8 @@ public class UserCreationTest extends TestRunner {
 
     @Test(dataProvider = "registerCorporateUserProvider")
     public void verifyCorporateUserDeletionByAdmin(RegisterCorporateUserModel registerCorporateUserModel) {
+        slf4JLogger.info("@Test verifyCorporateUserDeletionByAdmin");
+
         registerCorporateUser(registerCorporateUserModel);
 
         AdminBasePage adminBasePage = loadApplication("Admin");
@@ -229,6 +237,7 @@ public class UserCreationTest extends TestRunner {
 
     @Test(dataProvider = "registerCorporateUserProvider")
     public void verifyCorporateUserModifyingByAdmin(RegisterCorporateUserModel registerCorporateUserModel) {
+        slf4JLogger.info("@Test verifyCorporateUserModifyingByAdmin");
 
         tableRow = 2;
         registerCorporateUser(registerCorporateUserModel);
@@ -246,11 +255,28 @@ public class UserCreationTest extends TestRunner {
                 String.format("00-%d", 100 + Integer.parseInt(createRandomValueWithInteger())),
                 String.format("Example_city_%s", createRandomValueWithInteger()), "corporate");
 
-        CorporateCustomersPage corporateCustomersPage = customersPage.clickDetailsButtonByTableRow(tableRow, CorporateCustomersPage.class);
+        CorporateCustomerDetailsPage corporateCustomerDetailsPage = customersPage.clickDetailsButtonByTableRow(tableRow, CorporateCustomerDetailsPage.class);
         tableRow++;
 
+        corporateCustomerDetailsPage.setEmailTextField(registerCorporateUserModel1.getEmail())
+                .setCompanyNameTextField(registerCorporateUserModel1.getCompanyName())
+                .setVatNumberTextField(registerCorporateUserModel1.getVatNumber())
+                .setFirstNameTextField(registerCorporateUserModel1.getContactPersonFirstName())
+                .setLastNameTextField(registerCorporateUserModel1.getContactPersonLastName())
+                .setMobileTextField(registerCorporateUserModel1.getMobile())
+                .setStreetTextField(registerCorporateUserModel1.getStreet())
+                .setCityTextField(registerCorporateUserModel1.getCity())
+                .setPostcodeTextField(registerCorporateUserModel1.getPostCode())
+                .clickSaveButton();
 
+        Assert.assertTrue(customersPage.isElementPresentInTheTable(String.format("%s %s",
+                registerCorporateUserModel1.getContactPersonFirstName(),
+                registerCorporateUserModel1.getContactPersonLastName())));
+        Assert.assertTrue(customersPage.isElementPresentInTheTable(registerCorporateUserModel1.getEmail()));
+        Assert.assertTrue(dbHelper.isObjectPresentInUsersTable(registerCorporateUserModel1));
 
+        //log out
+        corporateCustomerDetailsPage.clickLogOutWebElement();
     }
 
     private void registerRetailUser(RegisterUserModel registerUserModel) {

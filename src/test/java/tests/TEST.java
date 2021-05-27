@@ -3,7 +3,7 @@ package tests;
 import org.testng.annotations.Test;
 import pages.AdminBasePage;
 
-public class TEST extends TestRunner{
+public class TEST extends AppointmentsSchedulerTestRunner {
 
     @Test
     public void lol() {

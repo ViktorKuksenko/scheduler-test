@@ -6,6 +6,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import pages.APTSElement;
+import pages.RegisterCorporateCustomersPage;
 import pages.TopPage;
 
 import java.util.List;
@@ -27,15 +28,10 @@ public class CustomersPage extends TopPage {
 
     @Step("click Details Button By Table Row")
     public <T> T  clickDetailsButtonByTableRow(long tableRow, Class<T> clazz) {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.getCause();
-        }
         String tableRowElementXpathExp = String.format("//tbody/tr[%d]/td/a[text()='Details']", tableRow);
         getAPTSElement(By.xpath(tableRowElementXpathExp)).waitForElementToBeClickable().click();
-        if (clazz == CorporateCustomersPage.class) {
-            return (T) new CorporateCustomersPage(driver);
+        if (clazz == CorporateCustomerDetailsPage.class) {
+            return (T) new CorporateCustomerDetailsPage(driver);
         }
         return (T) new CustomerDetailsPage(driver);
 

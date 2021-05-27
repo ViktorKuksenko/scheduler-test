@@ -3,7 +3,6 @@ package pages;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import pages.customers.CorporateCustomersPage;
 
 public class LoginPage extends TopPage{
 
@@ -26,8 +25,7 @@ public class LoginPage extends TopPage{
         } catch (Throwable ex) {
             ex.getCause();
         }
-        loginTextField.waitForElementToBeVisible()
-                .waitForElementToBeClickable()
+        loginTextField.waitForElementToBeClickable()
                 .click()
                 .clearAndSendText(login);
         return this;
@@ -64,10 +62,10 @@ public class LoginPage extends TopPage{
         return new RegisterUserPage(driver);
     }
 
-    public CorporateCustomersPage clickCorporateLink() {
+    public RegisterCorporateCustomersPage clickCorporateLink() {
         corporate.waitForElementToBeClickable()
                 .click();
-        return new CorporateCustomersPage(driver);
+        return new RegisterCorporateCustomersPage(driver);
     }
 
 }
