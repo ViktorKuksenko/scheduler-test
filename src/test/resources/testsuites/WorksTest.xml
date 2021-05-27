@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="Suite2">
-    <parameter name="url" value="http://localhost:8080/"/>
+
 
     <test name="Test02">
 
@@ -14,7 +14,6 @@
                     <include name="verifyUpdatingTableAfterClickingDetailsButton"/>
                 </methods>
             </class>
-
         </classes>
     </test>
 
