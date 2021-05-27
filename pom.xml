@@ -225,7 +225,6 @@
                         </surefire.application.password>
                     </systemPropertyVariables>
                     <suiteXmlFiles>
-                        <!-- <suiteXmlFile>testng.xml</suiteXmlFile> -->
                         <!-- <suiteXmlFile>testng2.xml</suiteXmlFile> -->
                         <suiteXmlFile>${run.testng.xml}</suiteXmlFile>
                     </suiteXmlFiles>

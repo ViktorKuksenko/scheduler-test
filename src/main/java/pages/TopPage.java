@@ -1,9 +1,7 @@
 package pages;
 
-import helpers.TableUtils;
 import helpers.WaitUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -32,12 +30,13 @@ public abstract class TopPage {
         return driver.findElement(By.xpath(getCommonNavBarXPathExp("Appointments")));
     }
 
-    public WebElement getMyAccountPageWebElement() {
+    public WebElement clickMyAccountPageWebElement() {
         return driver.findElement(By.xpath(getCommonNavBarXPathExp("My account")));
     }
 
-    public WebElement getNotificationsPageWebElement() {
-        return driver.findElement(By.id("notifications-count"));
+    public NotificationsPage clickNotificationsPageWebElement() {
+        getAPTSElement(By.id("notifications-count")).click();
+        return new NotificationsPage(driver);
     }
 
     public String getLoggedAsWebElement() {
@@ -50,6 +49,11 @@ public abstract class TopPage {
         WebElement logOutWebElement = logOutElement.getWebElement();
         WaitUtils.waitForStalenessOfElementLocated(driver, logOutWebElement);
         return logOutElement;
+    }
+
+
+    public String getPageTitleText() {
+        return driver.getTitle();
     }
 
     public boolean isPresentPageTitle() {

@@ -1,27 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Suite2">
+<suite name="Suite1">
     <parameter name="url" value="http://localhost:8080/"/>
 
     <test name="Test01">
 
         <classes>
-            <class name="tests.admin.UserCreationTest"/>
-
-                        <class name="tests.admin.WorksTest">
-                            <methods>
-                                <include name="verifyRetailUserCreation"/>
-                            </methods>
-                            <methods>
-                                <include name="verifyUserDeletionByAdmin"/>
-                            </methods>
-                            <methods>
-                                <include name="verifyUserModifyingByAdmin"/>
-                            </methods>
-                        </class>
+            <class name="tests.admin.UserCreationTest">
+                <methods>
+                    <include name="verifyRetailUserCreation"/>
+                    <include name="verifyUserDeletionByAdmin"/>
+                    <include name="verifyUserModifyingByAdmin"/>
+                    <include name="verifyCorporateUserCreation"/>
+                    <include name="verifyCorporateUserDeletionByAdmin"/>
+                    <include name="verifyCorporateUserModifyingByAdmin"/>
+                </methods>
+            </class>
 
         </classes>
-    </test> <!-- Test -->
+    </test>
 
-</suite> <!-- Suite -->
+</suite>
