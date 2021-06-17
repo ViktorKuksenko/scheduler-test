@@ -19,12 +19,12 @@ public class UserCreationTest extends AppointmentsSchedulerTestRunner {
     private PropertiesUtils propertiesUtils;
 
     public UserCreationTest() {
-       propertiesUtils = PropertiesUtils.getInstance("C:\\Users\\volod\\OneDrive\\Рабочий стол\\BK\\ui-scheduler\\src\\main\\resources\\users.properties");
+        propertiesUtils = PropertiesUtils.getInstance("C:\\Users\\volod\\OneDrive\\Рабочий стол\\BK\\ui-scheduler\\src\\main\\resources\\users.properties");
     }
 
     @DataProvider
     public Object[][] registerRetailUserProvider() {
-        return new Object[][] {
+        return new Object[][]{
                 {new RegisterUserModel(String.format("user%s", createRandomValueWithInteger()), "qwerty123",
                         "Tom", "Jackson", String.format("%s@gmail.com",
                         createRandomValueWithInteger()), "123456789", String.format("ul. Example %sa",
@@ -54,7 +54,7 @@ public class UserCreationTest extends AppointmentsSchedulerTestRunner {
 
     @DataProvider
     public Object[][] registerCorporateUserProvider() {
-        return new Object[][] {
+        return new Object[][]{
                 {new RegisterCorporateUserModel(String.format("user%s", createRandomValueWithInteger()), "qwerty123",
                         String.format("Some_company_%s", createRandomValueWithInteger()), "0123456789", "Jane",
                         "Willson", String.format("%s@gmail.com", createRandomValueWithInteger()), "123456789",
@@ -255,7 +255,8 @@ public class UserCreationTest extends AppointmentsSchedulerTestRunner {
                 String.format("00-%d", 100 + Integer.parseInt(createRandomValueWithInteger())),
                 String.format("Example_city_%s", createRandomValueWithInteger()), "corporate");
 
-        CorporateCustomerDetailsPage corporateCustomerDetailsPage = customersPage.clickDetailsButtonByTableRow(tableRow, CorporateCustomerDetailsPage.class);
+        CorporateCustomerDetailsPage corporateCustomerDetailsPage = customersPage.clickDetailsButtonByTableRow(tableRow,
+                CorporateCustomerDetailsPage.class);
         tableRow++;
 
         corporateCustomerDetailsPage.setEmailTextField(registerCorporateUserModel1.getEmail())

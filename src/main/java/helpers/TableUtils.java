@@ -20,12 +20,10 @@ public class TableUtils {
         this.tableNameCssSelector = cssSelector;
     }
 
-
     public long getTableRowsCountByTableName() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         return (Long) js.executeScript(String.format("return $('%s').find('tr').length", tableNameCssSelector));
     }
-
 
     public boolean isElementPresentInTheTable(String elementToFind, String rowsClassName) {
         boolean isElementPresent = false;
@@ -44,11 +42,6 @@ public class TableUtils {
 
     public List<String> getListOfColumnValuesByColumnName(String theadElement, String theadClassName
             , String rowsClassName) {
-        // get elements in table head
-        // chek if input element contains in table head
-        // get position of the element
-        // get values by position
-        // save found values in list
         List<String> listOfColumnValues = new ArrayList<>();
         List<String> theadRows = getTheadRowsElementsListByTheadClassName(theadClassName);
         int positionOfTheadElement = 0;
@@ -82,7 +75,7 @@ public class TableUtils {
         return getListOfWebElementsText(elementsInTableRow);
     }
 
-    public List<String> getListOfWebElementsText(List<WebElement> webElementList) {
+    private List<String> getListOfWebElementsText(List<WebElement> webElementList) {
         return webElementList.stream()
                 .map(webElement -> webElement.getText())
                 .collect(Collectors.toList());
@@ -91,7 +84,6 @@ public class TableUtils {
     public List<String> getTheadRowsElementsListByTheadClassName(String theadClassName) {
         List<WebElement> elementsInFirstTableRow = driver.findElements(By.xpath(String
                 .format("//thead[@class='%s']/tr/th", theadClassName)));
-        //thead-dark
         return getListOfWebElementsText(elementsInFirstTableRow);
     }
 

@@ -85,6 +85,7 @@ public class AppointmentsSchedulerTestRunner {
     public void afterMethod(ITestResult result) {
         if (!result.isSuccess()) {
             slf4JLogger.error("FAILED TEST" + result.getName() + " ERROR");
+            createScreenShot(result.getName());
         } else {
             slf4JLogger.info("TEST PASSED SUCCESSFULLY" +  result.getName());
         }
@@ -97,13 +98,12 @@ public class AppointmentsSchedulerTestRunner {
                 .format(new Date());
         File scrFile = ((TakesScreenshot) getWebDriver()).getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(scrFile, new File("./" + currentTime + "_Test_Method_Name_" + methodName + "_screenshot.png"));
+            FileUtils.copyFile(scrFile, new File("./" + currentTime + "_Test_Method_Name_" + methodName + "_screenShot.png"));
         } catch (IOException e) {
             slf4JLogger.error("ERROR during screenShot creation!");
             e.printStackTrace();
         }
     }
-
 
     protected void setWindowSize(int width, int height) {
         getWebDriver().manage().window().setSize(new Dimension(width, height));

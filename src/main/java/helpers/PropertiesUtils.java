@@ -1,6 +1,5 @@
 package helpers;
 
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -24,18 +23,16 @@ public class PropertiesUtils {
     }
 
     private Map<String, String> getPropertiesFileElements() {
-       Map var1 = getProperties();
-       Map<String, String> var2 = (Map<String, String>) var1;
-       return new HashMap<>(var2);
+        Map var1 = getProperties();
+        Map<String, String> var2 = (Map<String, String>) var1;
+        return new HashMap<>(var2);
     }
 
 
     public void setProperty(String key, String value) {
         HashMap<String, String> modifiedHashMap = new HashMap<>();
-//        int mapSize = propMap.size();
         for (Map.Entry<String, String> ent : propMap.entrySet()) {
             if (ent.getKey().equals(key)) {
-//                propMap.remove(key);
                 modifiedHashMap.put(key, value);
             } else if (!ent.getKey().equals(key)) {
                 modifiedHashMap.put(ent.getKey(), ent.getValue());
@@ -55,7 +52,6 @@ public class PropertiesUtils {
         }
     }
 
-
     private Properties getProperties() {
         Properties properties = null;
         try {
@@ -73,15 +69,4 @@ public class PropertiesUtils {
         return getProperties().getProperty(propertyName);
     }
 
-    public void writeProperty(String key, String value) {
-        try {
-            FileOutputStream fileOutputStream = new FileOutputStream(filePath);
-            Properties properties = getProperties();
-            properties.setProperty(key, value);
-            properties.store(fileOutputStream, "null");
-            fileOutputStream.close();
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
-    }
 }

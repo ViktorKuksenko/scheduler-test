@@ -5,7 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-
 public abstract class TopPage {
 
     private WebDriver driver;
@@ -50,7 +49,6 @@ public abstract class TopPage {
         WaitUtils.waitForStalenessOfElementLocated(driver, logOutWebElement);
         return logOutElement;
     }
-
 
     public String getPageTitleText() {
         return driver.getTitle();

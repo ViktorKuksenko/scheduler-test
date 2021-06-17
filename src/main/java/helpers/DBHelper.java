@@ -29,8 +29,8 @@ public class DBHelper {
     public static DBHelper getInstance() {
         return new DBHelper();
     }
+
     public boolean isObjectPresentInWorksTable(DetailsPageModel detailsPageModel) {
-        System.out.println(detailsPageModel.toString());
         String query = "SELECT * FROM works";
         List<DetailsPageModel> detailsPageModels = new ArrayList<>();
         boolean isObjectPresent = false;
@@ -119,7 +119,6 @@ public class DBHelper {
             ex.printStackTrace();
         }
         for (RegisterCorporateUserModel registerUserModel: registerUserModels) {
-//            System.out.println(pageModel.toString());
             if (registerCorporateUserModel.getUsername().equals(registerUserModel.getUsername()) &&
                     registerCorporateUserModel.getContactPersonFirstName().equals(registerUserModel.getContactPersonFirstName()) &&
                     registerCorporateUserModel.getContactPersonLastName().equals(registerUserModel.getContactPersonLastName()) &&

@@ -9,7 +9,6 @@ public class ConnFactory {
     private String user;
     private String password;
     private PropertiesUtils propertiesUtils;
-    private Properties properties;
 
     private ConnFactory() {
         propertiesUtils = new PropertiesUtils("src/main/resources/config.properties");
